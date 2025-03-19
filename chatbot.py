@@ -1,4 +1,5 @@
-import configparser
+# import configparser
+import os
 import logging
 import redis
 from telegram import Update
@@ -6,13 +7,14 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from ChatGPT_HKBU import HKBU_ChatGPT
 
 global redis1
-
+TELEGRAM_MAX_MESSAGE_LENGTH = int(os.environ.get("MAX_TOKEN"))
 
 def main():
     # Load your token and create an Updater for your Bot
     config = configparser.ConfigParser()
-    config.read('config.ini')
-    updater = Updater(token=(config['TELEGRAM']['ACCESS_TOKEN']), use_context=True)
+    # config.read('config.ini')
+    # updater = Updater(token=(config['TELEGRAM']['ACCESS_TOKEN']), use_context=True)
+    updater = Updater(token=(os.environ["ACCESS_TOKEN_TG"]), use_context=True)
     dispatcher = updater.dispatcher
     global redis1
     redis1 = redis.Redis(host=(config['REDIS']['HOST']),
@@ -70,10 +72,11 @@ def add(update: Update, context: CallbackContext) -> None:
     try:
         global redis1
         logging.info(context.args[0])
-        msg = context.args[0] # /add keyword <-- this should store the keyword
+        msg = context.args[0]  # /add keyword <-- this should store the keyword
         redis1.incr(msg)
-        update.message.reply_text('You have said ' + msg + ' for ' +
-        redis1.get(msg).decode('UTF-8') + ' times.')
+
+        update.message.reply_text('You have said ' + msg + ' for ' + redis1.get(msg) + ' times.')
+
     except (IndexError, ValueError):
         update.message.reply_text('Usage: /add <keyword>')
 
