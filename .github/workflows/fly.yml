@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@v2
+      - uses: superfly/flyctl-actions@latest
       - name: Login and Deploy
         run: |
           flyctl auth login --token $FLY_API_TOKEN
