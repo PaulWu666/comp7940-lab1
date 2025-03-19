@@ -25,7 +25,7 @@ jobs:
       # 3. 登录并部署到 Fly.io
       - name: Deploy Application
         run: |
-          flyctl auth login --access-token  # 显式登录
+          flyctl auth login --access-token "${{ secrets.FLY_API_TOKEN }}"  # 显式登录
           flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}  # 引用 GitHub Secret
