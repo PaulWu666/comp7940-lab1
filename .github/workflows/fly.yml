@@ -4,8 +4,10 @@ on:
     branches:
        - main # change to main if needed
 jobs:
-  deploy:
-  name: Deploy app
+  runs-on: ubuntu-latest
+  
+deploy:
+  name: Deployapp
   runs-on: ubuntu-latest
   concurrency: deploy-group # optional: ensure only one action runs at a time
   steps:
