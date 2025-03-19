@@ -28,7 +28,7 @@ def main():
     # # and why things do not work as expected Meanwhile, update your config.ini as:
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
     global chatgpt
-    chatgpt = HKBU_ChatGPT(config)
+    chatgpt = HKBU_GPT()
     chatgpt_handler = MessageHandler(Filters.text & (~Filters.command), equiped_chatgpt)
     dispatcher.add_handler(chatgpt_handler)
     # register a dispatcher to handle message: here we register an echo dispatcher
