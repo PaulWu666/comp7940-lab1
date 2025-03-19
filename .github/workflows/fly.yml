@@ -18,11 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4  # 升级到最新版本
 
-      # 2. 配置 Flyctl 工具
-      - name: Setup Flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@v2  # 使用稳定版本
-
-      # 3. 执行部署命令
+      # 2. 执行部署命令
       - name: Deploy Application
         run: flyctl deploy --remote-only
         env:
