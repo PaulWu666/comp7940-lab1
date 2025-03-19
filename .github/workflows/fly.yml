@@ -20,7 +20,7 @@ jobs:
 
       # 2. 配置 Flyctl 工具
       - name: Setup Flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@v2
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
       # 3. 登录并部署到 Fly.io
       - name: Deploy Application
