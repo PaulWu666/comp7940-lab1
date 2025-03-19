@@ -1,0 +1,31 @@
+name: Fly Deploy
+
+on:
+  push:
+    branches:
+      - main  # 触发分支
+
+jobs:
+  deploy:
+    name: Deploy to Fly.io
+    runs-on: ubuntu-latest  # 运行环境
+    concurrency:
+      group: deploy-group   # 并发组名
+      cancel-in-progress: true  # 取消正在进行的任务
+
+    steps:
+      # 1. 检出代码（核心步骤）
+      - name: Checkout repository
+        uses: actions/checkout@v4  # 官方检出 Action
+
+      # 2. 配置 Flyctl 工具
+      - name: Setup Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@v2
+
+      # 3. 登录并部署到 Fly.io
+      - name: Deploy Application
+        run: |
+          flyctl auth login --token $FLY_API_TOKEN  # 显式登录
+          flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}  # 引用 GitHub Secret
