@@ -24,7 +24,7 @@ def main():
     #                 username=(config['REDIS']['USER_NAME']))
     # # You can set this logging module, so you will know when
     # # and why things do not work as expected Meanwhile, update your config.ini as:
-    # logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
     global chatgpt
     chatgpt = HKBU_ChatGPT(config)
     chatgpt_handler = MessageHandler(Filters.text & (~Filters.command), equiped_chatgpt)
