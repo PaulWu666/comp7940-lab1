@@ -1,7 +1,7 @@
 # import configparser
 import os
 import logging
-import redis
+# import redis
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from ChatGPT_HKBU import HKBU_ChatGPT
